@@ -29,7 +29,7 @@ fun SignUpBody(navController: NavController){
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Text("Sign In")
+        Text("Sign Up")
         Button(onClick = {
             navController.navigate(route = AppScreens.MainMenu.route)
         }){
