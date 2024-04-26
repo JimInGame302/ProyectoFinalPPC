@@ -101,6 +101,7 @@ fun SignInBody(navController: NavController) {
         modifier = Modifier
             .width(70.dp)
             .height(70.dp)
+
     ) {
         Icon(painter = painterResource(R.drawable.back), contentDescription = "")
     }
