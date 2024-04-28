@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.proyectofinalppc.navigation.AppNavigation
 import com.example.proyectofinalppc.navigation.AppScreens
+import kotlin.system.exitProcess
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -47,6 +50,7 @@ fun MainMenuBodyContent(navController: NavController) {
         ) {
             Text(text = "Join")
         }
+        Spacer(modifier = Modifier.height(10.dp))
         Button(
             onClick = {
                 navController.navigate(route = AppScreens.SignIn.route)
@@ -57,6 +61,7 @@ fun MainMenuBodyContent(navController: NavController) {
         ) {
             Text(text = "Sign in")
         }
+        Spacer(modifier = Modifier.height(10.dp))
         Button(
             onClick = {
                 navController.navigate(route = AppScreens.Settings.route)
@@ -68,6 +73,7 @@ fun MainMenuBodyContent(navController: NavController) {
         {
             Text(text = "Settings")
         }
+        Spacer(modifier = Modifier.height(10.dp))
         Button(
             onClick = {/*TODO*/ },
             Modifier
@@ -77,8 +83,11 @@ fun MainMenuBodyContent(navController: NavController) {
         ) {
             Text(text = "Contact us")
         }
+        Spacer(modifier = Modifier.height(10.dp))
         Button(
-            onClick = {/*TODO*/ },
+            onClick = {
+                exitProcess(0)
+            },
             shape = CutCornerShape(0)
         ) {
             Text(text = "Exit")
