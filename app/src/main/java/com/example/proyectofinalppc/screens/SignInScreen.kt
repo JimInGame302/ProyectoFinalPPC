@@ -1,5 +1,6 @@
 package com.example.proyectofinalppc.screens
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.text.style.BackgroundColorSpan
 import androidx.compose.foundation.background
@@ -36,6 +37,7 @@ import androidx.navigation.NavController
 import com.example.proyectofinalppc.R
 import com.example.proyectofinalppc.navigation.AppScreens
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignIn(navController: NavController) {
     Scaffold {

@@ -1,5 +1,6 @@
 package com.example.proyectofinalppc.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.navigation.NavController
 import com.example.proyectofinalppc.navigation.AppNavigation
 import com.example.proyectofinalppc.navigation.AppScreens
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainMenu(navController: NavController) {
     Scaffold {

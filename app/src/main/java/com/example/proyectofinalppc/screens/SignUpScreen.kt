@@ -32,6 +32,7 @@ import com.example.proyectofinalppc.R
 import com.example.proyectofinalppc.navigation.AppScreens
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignUp(navController: NavController){
     Scaffold {
