@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -33,6 +34,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.proyectofinalppc.R
 import com.example.proyectofinalppc.navigation.AppScreens
@@ -52,7 +54,16 @@ fun SignInBody(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Sign In")
+
+        Text(
+            "Sign In",
+            style = TextStyle(
+                fontSize = 50.sp
+            )
+        )
+
+        Spacer(modifier = Modifier.height(100.dp))
+
         var username by remember { mutableStateOf(TextFieldValue("")) }
         TextField(
             value = username,
@@ -63,6 +74,9 @@ fun SignInBody(navController: NavController) {
             placeholder = { Text("Username") },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
         var password by remember { mutableStateOf(TextFieldValue("")) }
         TextField(
             value = password,
@@ -74,6 +88,9 @@ fun SignInBody(navController: NavController) {
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
         Button(onClick = {
         }) {
             Text(
@@ -81,10 +98,16 @@ fun SignInBody(navController: NavController) {
                 modifier = Modifier.padding(4.dp)
             )
         }
+
+        Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = "don't have an account yet?",
             modifier = Modifier.padding(4.dp)
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
         ClickableText(
             onClick = {
                 navController.navigate(route = AppScreens.SignUp.route)

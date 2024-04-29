@@ -61,7 +61,7 @@ fun SettingsScreenBody(navController: NavController) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        val languages = listOf("Español", "English")
+        val languages = listOf("English", "Español")
         Text(text = "Language")
         ComboBox(lista = languages)
 
