@@ -69,7 +69,7 @@ fun FavoritePlantBodyContent(navController: NavController){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ){
-            Text(text = "Perform monitoring")
+            Text(text = if (language=="Español")"Realizar monitorio" else "Perform monitoring")
             Spacer(modifier = Modifier.width(20.dp))
             Switch(checked = checkedMonitoring
                 , onCheckedChange ={

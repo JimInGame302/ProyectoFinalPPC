@@ -1,7 +1,6 @@
 package com.example.proyectofinalppc.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.core.exponentialDecay
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,11 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -31,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -52,8 +48,7 @@ fun SettingsScreenBody(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        Text(text = "Settings",
+        Text(text = if (language=="Español")"Configuración" else "Settings",
             style = TextStyle(
                 fontSize = 50.sp
             )
@@ -62,8 +57,8 @@ fun SettingsScreenBody(navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
 
         val languages = listOf("English", "Español")
-        Text(text = "Language")
-        ComboBox(lista = languages)
+        Text(text = if (language=="Español")"Lenguaje" else "Language")
+        ComboBox(lista = languages, navController)
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -72,7 +67,7 @@ fun SettingsScreenBody(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = "Music")
+            Text(text = if (language=="Español")"Musica" else "Music")
             Spacer(modifier = Modifier.width(20.dp))
             Switch(checked = checkedMusic
                 , onCheckedChange ={
@@ -88,7 +83,7 @@ fun SettingsScreenBody(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ){
-            Text(text = "SFX")
+            Text(text = if (language=="Español")"Efectos de sonido" else "SFX")
             Spacer(modifier = Modifier.width(20.dp))
             Switch(checked = checkedSFX
                 , onCheckedChange ={
@@ -108,17 +103,16 @@ fun SettingsScreenBody(navController: NavController) {
         }
     }
 }
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComboBox(lista: List<String>) {
+fun ComboBox(lista: List<String>, navController: NavController) {
     var isExpanded by remember {
         mutableStateOf(false)
     }
     var selectedText by remember {
-        mutableStateOf(lista[0])
+        mutableStateOf(language)
     }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -157,7 +151,9 @@ fun ComboBox(lista: List<String>) {
                         },
                         onClick = {
                             selectedText = lista[index]
+                            language=selectedText
                             isExpanded = false
+                            navController.navigate(route = AppScreens.Settings.route)
                         },
                         contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                     )

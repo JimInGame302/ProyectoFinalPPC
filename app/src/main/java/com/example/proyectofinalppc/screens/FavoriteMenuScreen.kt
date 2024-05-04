@@ -76,7 +76,7 @@ fun FavoriteMenuBodyContent(navController: NavController) {
                 active = it
                 showGrid = false
             },
-            placeholder = { Text(text = "Search a country") },
+            placeholder = { Text(text = if (language=="Español")"Busca un país" else "Search a country") },
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = null) },
         )
         {

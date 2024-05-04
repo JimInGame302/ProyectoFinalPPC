@@ -56,7 +56,7 @@ fun SignInBody(navController: NavController) {
     ) {
 
         Text(
-            "Sign In",
+            if (language=="Español")"Iniciar sesión" else "Sign In",
             style = TextStyle(
                 fontSize = 50.sp
             )
@@ -71,7 +71,7 @@ fun SignInBody(navController: NavController) {
                 username = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text("Username") },
+            placeholder = { Text(if (language=="Español")"Nombre de usuario" else "Username") },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
 
@@ -84,7 +84,7 @@ fun SignInBody(navController: NavController) {
                 password = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text("Password") },
+            placeholder = { Text(if (language=="Español")"Contraseña" else "Password") },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
         )
@@ -94,7 +94,7 @@ fun SignInBody(navController: NavController) {
         Button(onClick = {
         }) {
             Text(
-                text = "Sign In",
+                text = if (language=="Español")"Iniciar sesión" else "Sign In",
                 modifier = Modifier.padding(4.dp)
             )
         }
@@ -102,7 +102,7 @@ fun SignInBody(navController: NavController) {
         Spacer(modifier = Modifier.height(5.dp))
 
         Text(
-            text = "don't have an account yet?",
+            text = if (language=="Español")"¿Aún no tienes una cuenta?" else "Don't have an account yet?",
             modifier = Modifier.padding(4.dp)
         )
 
@@ -112,7 +112,7 @@ fun SignInBody(navController: NavController) {
             onClick = {
                 navController.navigate(route = AppScreens.SignUp.route)
             },
-            text = "Sign Up"
+            text = if (language=="Español")"Registrate" else "Sign Up"
         )
     }
     Button(

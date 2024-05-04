@@ -49,7 +49,7 @@ fun PlantDescription(navController: NavController) {
 @Composable
 fun PlantDescriptionBody(navController: NavController) {
     var favorite by remember { mutableStateOf(false) }
-    var data by remember { mutableStateOf(TextFieldValue("Plant description \nPlant cares \nCuriosities of the plant")) }
+    var data by remember { mutableStateOf(TextFieldValue(if (language=="Español")"Descripción de la planta \nCuidados de la planta \nCuriosidades de la planta" else "Plant description \nPlant cares \nCuriosities of the plant")) }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -74,13 +74,13 @@ fun PlantDescriptionBody(navController: NavController) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(text = "Name")
+                Text(text = if (language=="Español")"Nombre" else "Name")
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(text = "Scientfic name")
+                Text(text = if (language=="Español")"Nombre científico" else "Scientfic name")
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(text = "Weather")
+                Text(text = if (language=="Español")"Clima" else "Weather")
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(text = "Ground")
+                Text(text = if (language=="Español")"Suelo" else "Ground")
             }
         }
 
@@ -104,15 +104,15 @@ fun PlantDescriptionBody(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         ){
-            Text(text = "Maduration time")
+            Text(text = if (language=="Español")"Tiempo de maduración" else "Maduration time")
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            Text(text = "Height")
+            Text(text = if (language=="Español")"Altura" else "Height")
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            Text(text = "Fruits")
+            Text(text = if (language=="Español")"Frutos" else "Fruits")
         }
     }
     Row(

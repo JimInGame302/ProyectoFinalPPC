@@ -47,6 +47,7 @@ import com.example.proyectofinalppc.navigation.AppNavigation
 import com.example.proyectofinalppc.navigation.AppScreens
 import kotlin.system.exitProcess
 
+var language: String = "English";
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainMenu(navController: NavController) {
@@ -63,7 +64,7 @@ fun MainMenuBodyContent(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Main Menu")
+        Text(if (language=="Español")"Menu principal" else "Main Menu")
         Button(
             onClick = {
                 navController.navigate(route = AppScreens.Element.route)
@@ -72,7 +73,7 @@ fun MainMenuBodyContent(navController: NavController) {
                 .padding(4.dp),
             shape = CutCornerShape(0)
         ) {
-            Text(text = "Join")
+            Text(text = if (language=="Español")"Ingresar" else "Join")
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
@@ -83,7 +84,7 @@ fun MainMenuBodyContent(navController: NavController) {
                 .padding(4.dp),
             shape = CutCornerShape(0)
         ) {
-            Text(text = "Sign in")
+            Text(text = if (language=="Español")"Iniciar sesión" else "Sign in")
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
@@ -95,7 +96,7 @@ fun MainMenuBodyContent(navController: NavController) {
             shape = CutCornerShape(0)
         )
         {
-            Text(text = "Settings")
+            Text(text = if (language=="Español")"Configuración" else "Settings")
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
@@ -107,7 +108,7 @@ fun MainMenuBodyContent(navController: NavController) {
                 .padding(4.dp),
             shape = CutCornerShape(0)
         ) {
-            Text(text = "Contact us")
+            Text(text = if (language=="Español")"Contactanos" else "Contact us")
             if (openAlertDialog) {
                 AlertDialogApp(
                     onDismissRequest = {
@@ -115,8 +116,10 @@ fun MainMenuBodyContent(navController: NavController) {
                     onConfirmation = {
                         openAlertDialog = false
                     },
-                    dialogTitle = "CONTACT LINKS",
-                    dialogText = "Email\n" +
+                    dialogTitle = if (language=="Español")"LINKS DE CONTACTO" else "CONTACT LINKS",
+                    dialogText = if (language=="Español")"Correo electronico\n" +
+                            "Número telefónico\n" +
+                            "Link de ubicación" else "Email\n" +
                             "Phone number\n" +
                             "Ubication link",
                     icon = Icons.Default.Call,
@@ -131,7 +134,7 @@ fun MainMenuBodyContent(navController: NavController) {
             },
             shape = CutCornerShape(0)
         ) {
-            Text(text = "Exit")
+            Text(text = if (language=="Español")"Salir" else "Exit")
         }
     }
 }
@@ -186,7 +189,7 @@ fun AlertDialogApp(
                     onConfirmation()
                 }
             ) {
-                Text("Confirm")
+                Text(if (language=="Español")"Confirmar" else "Confirm")
             }
         }
     )
