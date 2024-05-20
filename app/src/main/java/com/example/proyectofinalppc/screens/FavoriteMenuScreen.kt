@@ -82,10 +82,7 @@ fun FavoriteMenuBodyContent(navController: NavController) {
         {
             if (query.isNotEmpty()) {
                 val filteredFavorites = countries.filter { it.contains(query, true) }
-                FavoriteGridFiltered(
-                    navController = navController,
-                    filteredFavorites = filteredFavorites
-                )
+                ElementGrid( navController, AppScreens.FavoritePlant.route, filteredFavorites)
             }
         }
     }
@@ -95,7 +92,7 @@ fun FavoriteMenuBodyContent(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            FavoriteGrid(navController)
+            ElementGrid(navController, AppScreens.FavoritePlant.route, countries)
         }
     }
     Row(
@@ -118,66 +115,5 @@ fun FavoriteMenuBodyContent(navController: NavController) {
             Icon(painter = painterResource(R.drawable.back), contentDescription = "")
         }
         Spacer(modifier = Modifier.width(270.dp))
-    }
-}
-
-@Composable
-fun FavoriteGrid(navController: NavController) {
-    val countries = countries
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 96.dp),
-        modifier = Modifier
-            .height(600.dp)
-            .padding(10.dp)
-            .border(1.dp, Color.Black)
-    ) {
-        items(countries) { country ->
-            FavoriteItem(onClick = {
-                navController.navigate(route = AppScreens.FavoritePlant.route)
-            }, painterResource(id = R.drawable.ic_launcher_background), country)
-        }
-    }
-}
-
-@Composable
-fun FavoriteGridFiltered(navController: NavController, filteredFavorites: List<String>) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 96.dp),
-        modifier = Modifier
-            .height(600.dp)
-            .padding(10.dp)
-            .border(1.dp, Color.Black)
-    ) {
-        items(filteredFavorites) { country ->
-            FavoriteItem(onClick = {
-                navController.navigate(route = AppScreens.FavoritePlant.route)
-            }, painterResource(id = R.drawable.ic_launcher_background), country)
-        }
-    }
-}
-
-@Composable
-fun FavoriteItem(
-    onClick: () -> Unit,
-    imagen: Painter,
-    nombre: String,
-) {
-    Column(
-        modifier = Modifier
-            .padding(8.dp)
-            .clickable(onClick = onClick),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = imagen,
-            contentDescription = null,
-            modifier = Modifier.size(80.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = nombre,
-            style = MaterialTheme.typography.titleSmall,
-            textAlign = TextAlign.Center
-        )
     }
 }

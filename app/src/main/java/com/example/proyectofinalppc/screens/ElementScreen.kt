@@ -81,9 +81,10 @@ fun ElementBodyContent(navController: NavController) {
         {
             if (query.isNotEmpty()) {
                 val filteredElements = countries.filter { it.contains(query, true) }
-                ElementGridFiltered(
+                ElementGrid(
                     navController = navController,
-                    filteredElements = filteredElements
+                    AppScreens.PlantDescription.route,
+                    elements = filteredElements
                 )
             }
         }
@@ -94,7 +95,7 @@ fun ElementBodyContent(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ElementGrid(navController)
+            ElementGrid(navController, AppScreens.PlantDescription.route, countries)
         }
     }
     Row(
@@ -133,10 +134,8 @@ fun ElementBodyContent(navController: NavController) {
         }
     }
 }
-
 @Composable
-fun ElementGrid(navController: NavController) {
-    val countries = countries
+fun ElementGrid(navController: NavController, route: String, elements: List<String>) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 96.dp),
         modifier = Modifier
@@ -144,26 +143,9 @@ fun ElementGrid(navController: NavController) {
             .padding(10.dp)
             .border(1.dp, Color.Black)
     ) {
-        items(countries) { country ->
+        items(elements) { country ->
             ElementItem(onClick = {
-                navController.navigate(route = AppScreens.PlantDescription.route)
-            }, painterResource(id = R.drawable.ic_launcher_background), country)
-        }
-    }
-}
-
-@Composable
-fun ElementGridFiltered(navController: NavController, filteredElements: List<String>) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 96.dp),
-        modifier = Modifier
-            .height(600.dp)
-            .padding(10.dp)
-            .border(1.dp, Color.Black)
-    ) {
-        items(filteredElements) { country ->
-            ElementItem(onClick = {
-                navController.navigate(route = AppScreens.PlantDescription.route)
+                navController.navigate(route = route)
             }, painterResource(id = R.drawable.ic_launcher_background), country)
         }
     }
