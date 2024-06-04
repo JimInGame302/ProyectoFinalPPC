@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,8 +49,20 @@ fun PlantDescription(navController: NavController) {
 
 @Composable
 fun PlantDescriptionBody(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val locale = configuration.locales[0]
     var favorite by remember { mutableStateOf(false) }
-    var data by remember { mutableStateOf(TextFieldValue(if (language=="Español")"Descripción de la planta \nCuidados de la planta \nCuriosidades de la planta" else "Plant description \nPlant cares \nCuriosities of the plant")) }
+    var data by remember { mutableStateOf(TextFieldValue((when (locale.language) {
+        "en" -> "Plant description \n" +
+                "Plant cares \n" +
+                "Curiosities of the plant"
+        "es" -> "Descripción de la planta \n" +
+                "Cuidados de la planta \n" +
+                "Curiosidades de la planta"
+        else -> "Plant description \n" +
+                "Plant cares \n" +
+                "Curiosities of the plant"
+    }))) }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -74,13 +87,28 @@ fun PlantDescriptionBody(navController: NavController) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(text = if (language=="Español")"Nombre" else "Name")
+                Text(text = when (locale.language) {
+                    "en" -> "Name"
+                    "es" -> "Nombre"
+                    else -> "Name"
+                })
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(text = if (language=="Español")"Nombre científico" else "Scientfic name")
+                Text(text = when (locale.language) {
+                    "en" -> "Scientfic name"
+                    "es" -> "Nombre científico"
+                    else -> "Scientfic name"
+                })
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(text = if (language=="Español")"Clima" else "Weather")
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(text = if (language=="Español")"Suelo" else "Ground")
+                Text(text = when (locale.language) {
+                    "en" -> "Weather"
+                    "es" -> "Clima"
+                    else -> "Weather"
+                })
+                Text(text = when (locale.language) {
+                    "en" -> "Ground"
+                    "es" -> "Suelo"
+                    else -> "Ground"
+                })
             }
         }
 
@@ -104,15 +132,27 @@ fun PlantDescriptionBody(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         ){
-            Text(text = if (language=="Español")"Tiempo de maduración" else "Maduration time")
+            Text(text = when (locale.language) {
+                "en" -> "Maduration time"
+                "es" -> "Tiempo de maduración"
+                else -> "Maduration time"
+            })
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            Text(text = if (language=="Español")"Altura" else "Height")
+            Text(text = when (locale.language) {
+                "en" -> "Height"
+                "es" -> "Altura"
+                else -> "Height"
+            })
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            Text(text = if (language=="Español")"Frutos" else "Fruits")
+            Text(text = when (locale.language) {
+                "en" -> "Fruits"
+                "es" -> "Frutos"
+                else -> "Fruits"
+            })
         }
     }
     Row(

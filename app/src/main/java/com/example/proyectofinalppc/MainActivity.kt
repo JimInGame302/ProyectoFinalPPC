@@ -11,11 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.proyectofinalppc.navigation.AppNavigation
+import com.example.proyectofinalppc.repository.FirebaseRepository
 import com.example.proyectofinalppc.screens.MainMenu
 import com.example.proyectofinalppc.ui.theme.ProyectoFinalPPCTheme
 
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             ProyectoFinalPPCTheme {

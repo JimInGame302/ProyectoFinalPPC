@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,6 +56,8 @@ fun FavoriteMenu(navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteMenuBodyContent(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val locale = configuration.locales[0]
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
     var showGrid by remember { mutableStateOf(true) }
@@ -76,7 +79,11 @@ fun FavoriteMenuBodyContent(navController: NavController) {
                 active = it
                 showGrid = false
             },
-            placeholder = { Text(text = if (language=="Español")"Busca un país" else "Search a country") },
+            placeholder = { Text(text = when (locale.language) {
+                "en" -> "Search a country"
+                "es" -> "Busca un país"
+                else -> "Search a country"
+            }) },
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = null) },
         )
         {
@@ -93,6 +100,7 @@ fun FavoriteMenuBodyContent(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ElementGrid(navController, AppScreens.FavoritePlant.route, countries)
+
         }
     }
     Row(

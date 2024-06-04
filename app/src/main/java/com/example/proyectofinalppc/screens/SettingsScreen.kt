@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,12 +44,18 @@ fun SettingsScreen(navController: NavController) {
 
 @Composable
 fun SettingsScreenBody(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val locale = configuration.locales[0]
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = if (language=="Español")"Configuración" else "Settings",
+        Text(text = (when (locale.language) {
+            "en" -> "Settings"
+            "es" -> "Configuración"
+            else -> "Settings"
+        }),
             style = TextStyle(
                 fontSize = 50.sp
             )
@@ -57,7 +64,13 @@ fun SettingsScreenBody(navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
 
         val languages = listOf("English", "Español")
-        Text(text = if (language=="Español")"Lenguaje" else "Language")
+
+        Text(text = when (locale.language) {
+            "en" -> "Language"
+            "es" -> "Lenguaje"
+            else -> "Language"
+        })
+
         ComboBox(lista = languages, navController)
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -67,7 +80,11 @@ fun SettingsScreenBody(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = if (language=="Español")"Musica" else "Music")
+            Text(text = when (locale.language) {
+                "en" -> "Music"
+                "es" -> "Musica"
+                else -> "Music"
+            })
             Spacer(modifier = Modifier.width(20.dp))
             Switch(checked = checkedMusic
                 , onCheckedChange ={
@@ -83,7 +100,11 @@ fun SettingsScreenBody(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ){
-            Text(text = if (language=="Español")"Efectos de sonido" else "SFX")
+            Text(text = when (locale.language) {
+                "en" -> "SFX"
+                "es" -> "Efectos de sonido"
+                else -> "SFX"
+            })
             Spacer(modifier = Modifier.width(20.dp))
             Switch(checked = checkedSFX
                 , onCheckedChange ={

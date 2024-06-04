@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,6 +49,8 @@ fun FavoritePlant(navController: NavController){
 
 @Composable
 fun FavoritePlantBodyContent(navController: NavController){
+    val configuration = LocalConfiguration.current
+    val locale = configuration.locales[0]
     var favorite by remember { mutableStateOf(true) }
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -69,7 +72,11 @@ fun FavoritePlantBodyContent(navController: NavController){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ){
-            Text(text = if (language=="Español")"Realizar monitorio" else "Perform monitoring")
+            Text(text = when (locale.language) {
+                "en" -> "Perform monitoring"
+                "es" -> "Realizar monitoreo"
+                else -> "Perform monitoring"
+            })
             Spacer(modifier = Modifier.width(20.dp))
             Switch(checked = checkedMonitoring
                 , onCheckedChange ={

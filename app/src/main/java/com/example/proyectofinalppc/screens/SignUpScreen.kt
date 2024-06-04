@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -45,6 +46,8 @@ fun SignUp(navController: NavController) {
 
 @Composable
 fun SignUpBody(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val locale = configuration.locales[0]
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -52,7 +55,11 @@ fun SignUpBody(navController: NavController) {
     ) {
 
         Text(
-            if (language=="Español")"Registrar cuenta" else "Sign up",
+            text = when (locale.language) {
+                "en" -> "Sign up"
+                "es" -> "Registrar cuenta"
+                else -> "Sign up"
+            },
             style = TextStyle(
                 fontSize = 50.sp
             )
@@ -67,7 +74,11 @@ fun SignUpBody(navController: NavController) {
                 username = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text(if (language=="Español")"Nombre de usuario" else "Username") },
+            placeholder = { Text(text = when (locale.language) {
+                "en" -> "Username"
+                "es" -> "Nombre de usuario"
+                else -> "Username"
+            }) },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
 
@@ -80,7 +91,11 @@ fun SignUpBody(navController: NavController) {
                 email = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text(if (language=="Español")"Correo electronico" else "Email") },
+            placeholder = { Text(text = when (locale.language) {
+                "en" -> "Email"
+                "es" -> "Correo electronico"
+                else -> "Email"
+            }) },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
 
@@ -93,7 +108,11 @@ fun SignUpBody(navController: NavController) {
                 password = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text(if (language=="Español")"Contraseña" else "Password") },
+            placeholder = { Text(text = when (locale.language) {
+                "en" -> "Password"
+                "es" -> "Contraseña"
+                else -> "Password"
+            }) },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
         )
@@ -107,7 +126,11 @@ fun SignUpBody(navController: NavController) {
                 cPassword = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text(if (language=="Español")"Confirmar contraseña" else "Confirm password") },
+            placeholder = { Text(text = when (locale.language) {
+                "en" -> "Confirm password"
+                "es" -> "Confirmar contraseña"
+                else -> "Confirm password"
+            }) },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
         )
@@ -117,7 +140,11 @@ fun SignUpBody(navController: NavController) {
         Button(onClick = {
         }) {
             Text(
-                text = if (language=="Español")"Registrar cuenta" else "Sign up",
+                text = when (locale.language) {
+                    "en" -> "Sign up"
+                    "es" -> "Registrar cuenta"
+                    else -> "Sign up"
+                },
                 modifier = Modifier.padding(4.dp)
             )
         }

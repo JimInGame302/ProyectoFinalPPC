@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -49,14 +50,19 @@ fun SignIn(navController: NavController) {
 
 @Composable
 fun SignInBody(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val locale = configuration.locales[0]
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text(
-            if (language=="Español")"Iniciar sesión" else "Sign In",
+        Text(text = when (locale.language) {
+                "en" -> "Sign In"
+                "es" -> "Iniciar sesión"
+                else -> "Sign In"
+            },
             style = TextStyle(
                 fontSize = 50.sp
             )
@@ -71,7 +77,11 @@ fun SignInBody(navController: NavController) {
                 username = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text(if (language=="Español")"Nombre de usuario" else "Username") },
+            placeholder = {Text(text = when (locale.language) {
+                "en" -> "Username"
+                "es" -> "Nombre de usuario"
+                else -> "Username"
+            }) },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
 
@@ -84,7 +94,11 @@ fun SignInBody(navController: NavController) {
                 password = newText
             },
             modifier = Modifier.padding(4.dp),
-            placeholder = { Text(if (language=="Español")"Contraseña" else "Password") },
+            placeholder = { Text(text = when (locale.language) {
+                "en" -> "Password"
+                "es" -> "Contraseña"
+                else -> "Password"
+            })},
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
         )
@@ -93,8 +107,11 @@ fun SignInBody(navController: NavController) {
 
         Button(onClick = {
         }) {
-            Text(
-                text = if (language=="Español")"Iniciar sesión" else "Sign In",
+            Text(text = when (locale.language) {
+                    "en" -> "Sign In"
+                    "es" -> "Iniciar sesión"
+                    else -> "Sign In"
+                },
                 modifier = Modifier.padding(4.dp)
             )
         }
@@ -102,7 +119,11 @@ fun SignInBody(navController: NavController) {
         Spacer(modifier = Modifier.height(5.dp))
 
         Text(
-            text = if (language=="Español")"¿Aún no tienes una cuenta?" else "Don't have an account yet?",
+            text = when (locale.language) {
+                "en" -> "Don't have an account yet?"
+                "es" -> "¿Aún no tienes una cuenta?"
+                else -> "Don't have an account yet?"
+            },
             modifier = Modifier.padding(4.dp)
         )
 
@@ -112,7 +133,11 @@ fun SignInBody(navController: NavController) {
             onClick = {
                 navController.navigate(route = AppScreens.SignUp.route)
             },
-            text = if (language=="Español")"Registrate" else "Sign Up"
+            text = when (locale.language) {
+                "en" -> "Sign Up"
+                "es" -> "Registrate"
+                else -> "Sign Up"
+            }
         )
     }
     Button(

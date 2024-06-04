@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "784551496064",
+    "project_id": "proyectofinalppc",
+    "storage_bucket": "proyectofinalppc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784551496064:android:c3f47850f0f0c7b33e1965",
+        "android_client_info": {
+          "package_name": "com.example.proyectofinalppc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYkKgA4Tsvz-x-TEVdSUgWeqPzJ9otZLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

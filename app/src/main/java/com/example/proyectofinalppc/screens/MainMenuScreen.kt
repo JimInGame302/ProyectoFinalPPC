@@ -37,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
@@ -55,16 +56,21 @@ fun MainMenu(navController: NavController) {
         MainMenuBodyContent(navController)
     }
 }
-
 @Composable
 fun MainMenuBodyContent(navController: NavController) {
+    val configuration = LocalConfiguration.current
+    val locale = configuration.locales[0]
     var openAlertDialog by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(if (language=="Español")"Menu principal" else "Main Menu")
+        Text(text = when (locale.language) {
+            "en" -> "Main Menu"
+            "es" -> "Menu principal"
+            else -> "Main Menu"
+        })
         Button(
             onClick = {
                 navController.navigate(route = AppScreens.Element.route)
@@ -73,7 +79,11 @@ fun MainMenuBodyContent(navController: NavController) {
                 .padding(4.dp),
             shape = CutCornerShape(0)
         ) {
-            Text(text = if (language=="Español")"Ingresar" else "Join")
+            Text(text = when (locale.language) {
+                "en" -> "Join"
+                "es" -> "Ingresar"
+                else -> "Join"
+            })
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
@@ -84,7 +94,11 @@ fun MainMenuBodyContent(navController: NavController) {
                 .padding(4.dp),
             shape = CutCornerShape(0)
         ) {
-            Text(text = if (language=="Español")"Iniciar sesión" else "Sign in")
+            Text(text = when (locale.language) {
+                "en" -> "Sign in"
+                "es" -> "Iniciar sesión"
+                else -> "Sign in"
+            })
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
@@ -96,7 +110,11 @@ fun MainMenuBodyContent(navController: NavController) {
             shape = CutCornerShape(0)
         )
         {
-            Text(text = if (language=="Español")"Configuración" else "Settings")
+            Text(text = when (locale.language) {
+                "en" -> "Settings"
+                "es" -> "Configuración"
+                else -> "Settings"
+            })
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
@@ -108,7 +126,11 @@ fun MainMenuBodyContent(navController: NavController) {
                 .padding(4.dp),
             shape = CutCornerShape(0)
         ) {
-            Text(text = if (language=="Español")"Contactanos" else "Contact us")
+            Text(text = when (locale.language) {
+                "en" -> "Contact us"
+                "es" -> "Contactanos"
+                else -> "Contact us"
+            })
             if (openAlertDialog) {
                 AlertDialogApp(
                     onDismissRequest = {
@@ -116,12 +138,22 @@ fun MainMenuBodyContent(navController: NavController) {
                     onConfirmation = {
                         openAlertDialog = false
                     },
-                    dialogTitle = if (language=="Español")"LINKS DE CONTACTO" else "CONTACT LINKS",
-                    dialogText = if (language=="Español")"Correo electronico\n" +
-                            "Número telefónico\n" +
-                            "Link de ubicación" else "Email\n" +
-                            "Phone number\n" +
-                            "Ubication link",
+                    dialogTitle =  when (locale.language) {
+                        "en" -> "CONTACT LINKS"
+                        "es" -> "LINKS DE CONTACTO"
+                        else -> "CONTACT LINKS"
+                    },
+                    dialogText = when (locale.language) {
+                        "en" -> "Email\n" +
+                                "Phone number\n" +
+                                "Ubication link"
+                        "es" -> "Correo electronico\n" +
+                                "Número telefónico\n" +
+                                "Link de ubicación"
+                        else -> "Email\n" +
+                                "Phone number\n" +
+                                "Ubication link"
+                    },
                     icon = Icons.Default.Call,
                     url = "https://www.linkedin.com/in/jimmy-saavedra-912062290/"
                 )
@@ -134,7 +166,11 @@ fun MainMenuBodyContent(navController: NavController) {
             },
             shape = CutCornerShape(0)
         ) {
-            Text(text = if (language=="Español")"Salir" else "Exit")
+            Text(text = when (locale.language) {
+                "en" -> "Exit"
+                "es" -> "Salir"
+                else -> "Exit"
+            })
         }
     }
 }
