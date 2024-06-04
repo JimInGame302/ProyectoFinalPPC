@@ -49,6 +49,17 @@ import com.example.proyectofinalppc.data.Plants
 import com.example.proyectofinalppc.navigation.AppScreens
 import com.example.proyectofinalppc.repository.FirebaseRepository
 
+var curiosities = ""
+var fruits = ""
+var ground = ""
+var height = 0.0F
+var image = ""
+var maduration = 0.0F
+var name = ""
+var plantCares = ""
+var plantDescription = ""
+var scientificName = ""
+var weather = ""
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ElementScreen(navController: NavController) {
@@ -167,6 +178,17 @@ fun ElementGrid(navController: NavController, route: String, elements: List<Plan
             val imageResId = plant.image.toIntOrNull() ?: R.drawable.arbol
             ElementItem(onClick = {
                 navController.navigate(route = route)
+                curiosities = plant.curiosities
+                fruits = plant.fruits
+                ground = plant.ground
+                height = plant.height
+                image = plant.image
+                maduration = plant.maduration
+                name = plant.name
+                plantCares = plant.plantCares
+                plantDescription = plant.plantDescription
+                scientificName = plant.scientificName
+                weather = plant.weather
             }, painterResource(id = imageResId), plant.name)
         }
     }

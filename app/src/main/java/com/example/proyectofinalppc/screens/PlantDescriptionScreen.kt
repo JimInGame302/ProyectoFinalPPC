@@ -52,15 +52,15 @@ fun PlantDescriptionBody(navController: NavController) {
     val locale = configuration.locales[0]
     var favorite by remember { mutableStateOf(false) }
     var data by remember { mutableStateOf(TextFieldValue((when (locale.language) {
-        "en" -> "Plant description \n" +
-                "Plant cares \n" +
-                "Curiosities of the plant"
-        "es" -> "Descripción de la planta \n" +
-                "Cuidados de la planta \n" +
-                "Curiosidades de la planta"
-        else -> "Plant description \n" +
-                "Plant cares \n" +
-                "Curiosities of the plant"
+        "en" -> "Plant description: $plantDescription \n\n" +
+                "Plant cares: $plantCares \n\n" +
+                "Curiosities of the plant: $curiosities"
+        "es" -> "Descripción de la planta: $plantDescription \n\n" +
+                "Cuidados de la planta: $plantCares \n\n" +
+                "Curiosidades de la planta: $curiosities"
+        else -> "Plant description: $plantDescription \n\n" +
+                "Plant cares: $plantCares \n\n" +
+                "Curiosities of the plant: $curiosities"
     }))) }
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -87,26 +87,26 @@ fun PlantDescriptionBody(navController: NavController) {
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(text = when (locale.language) {
-                    "en" -> "Name"
-                    "es" -> "Nombre"
-                    else -> "Name"
+                    "en" -> "Name: $name"
+                    "es" -> "Nombre: $name"
+                    else -> "Name: $name"
                 })
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(text = when (locale.language) {
-                    "en" -> "Scientfic name"
-                    "es" -> "Nombre científico"
-                    else -> "Scientfic name"
+                    "en" -> "Scientfic name: $scientificName"
+                    "es" -> "Nombre científico: $scientificName"
+                    else -> "Scientfic name: $scientificName"
                 })
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(text = when (locale.language) {
-                    "en" -> "Weather"
-                    "es" -> "Clima"
-                    else -> "Weather"
+                    "en" -> "Weather: $weather"
+                    "es" -> "Clima: $weather"
+                    else -> "Weather: $weather"
                 })
                 Text(text = when (locale.language) {
-                    "en" -> "Ground"
-                    "es" -> "Suelo"
-                    else -> "Ground"
+                    "en" -> "Ground: $ground"
+                    "es" -> "Suelo: $ground"
+                    else -> "Ground: $ground"
                 })
             }
         }
@@ -132,25 +132,25 @@ fun PlantDescriptionBody(navController: NavController) {
             horizontalAlignment = Alignment.Start
         ){
             Text(text = when (locale.language) {
-                "en" -> "Maduration time"
-                "es" -> "Tiempo de maduración"
-                else -> "Maduration time"
+                "en" -> "Maduration time: $maduration months"
+                "es" -> "Tiempo de maduración: $maduration meses"
+                else -> "Maduration time: $maduration months"
             })
 
             Spacer(modifier = Modifier.height(30.dp))
 
             Text(text = when (locale.language) {
-                "en" -> "Height"
-                "es" -> "Altura"
-                else -> "Height"
+                "en" -> "Height: $height meters"
+                "es" -> "Altura: $height metros"
+                else -> "Height: $height meters"
             })
 
             Spacer(modifier = Modifier.height(30.dp))
 
             Text(text = when (locale.language) {
-                "en" -> "Fruits"
-                "es" -> "Frutos"
-                else -> "Fruits"
+                "en" -> "Fruits: $fruits"
+                "es" -> "Frutos: $fruits"
+                else -> "Fruits: $fruits"
             })
         }
     }
