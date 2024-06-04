@@ -1,6 +1,8 @@
 package com.example.proyectofinalppc.screens
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,6 +30,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.proyectofinalppc.R
+import com.example.proyectofinalppc.data.Plants
 import com.example.proyectofinalppc.navigation.AppScreens
 import com.example.proyectofinalppc.repository.FirebaseRepository
 
@@ -60,7 +64,15 @@ fun ElementBodyContent(navController: NavController) {
     val configuration = LocalConfiguration.current
     val locale = configuration.locales[0]
     val firebaseRepository = FirebaseRepository()
-    firebaseRepository.getDocuments()
+    var plants by remember { mutableStateOf<List<Plants>>(emptyList()) }
+
+    LaunchedEffect(Unit) {
+        firebaseRepository.getDocuments { retrievedPlants ->
+            plants = retrievedPlants
+            Log.d("ElementBodyContent", "Plants: $plants")
+        }
+    }
+
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
     Column(
@@ -89,7 +101,7 @@ fun ElementBodyContent(navController: NavController) {
         )
         {
             if (query.isNotEmpty()) {
-                val filteredElements = countries.filter { it.contains(query, true) }
+                val filteredElements = plants.filter { it.name.contains(query, true) }
                 ElementGrid(
                     navController,
                     AppScreens.PlantDescription.route,
@@ -104,7 +116,7 @@ fun ElementBodyContent(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ElementGrid(navController, AppScreens.PlantDescription.route, countries)
+            ElementGrid(navController, AppScreens.PlantDescription.route, plants)
         }
     }
     Row(
@@ -144,7 +156,7 @@ fun ElementBodyContent(navController: NavController) {
     }
 }
 @Composable
-fun ElementGrid(navController: NavController, route: String, elements: List<String>) {
+fun ElementGrid(navController: NavController, route: String, elements: List<Plants>) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 96.dp),
         modifier = Modifier
@@ -152,10 +164,10 @@ fun ElementGrid(navController: NavController, route: String, elements: List<Stri
             .padding(10.dp)
             .border(1.dp, Color.Black)
     ) {
-        items(elements) { country ->
+        items(elements) { plant ->
             ElementItem(onClick = {
                 navController.navigate(route = route)
-            }, painterResource(id = R.drawable.ic_launcher_background), country)
+            }, painterResource(id = R.drawable.ic_launcher_background), plant.name)
         }
     }
 }

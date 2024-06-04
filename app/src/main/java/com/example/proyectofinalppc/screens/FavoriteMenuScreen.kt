@@ -89,7 +89,7 @@ fun FavoriteMenuBodyContent(navController: NavController) {
         {
             if (query.isNotEmpty()) {
                 val filteredFavorites = countries.filter { it.contains(query, true) }
-                ElementGrid( navController, AppScreens.FavoritePlant.route, filteredFavorites)
+                //ElementGrid( navController, AppScreens.FavoritePlant.route, filteredFavorites)
             }
         }
     }
@@ -99,7 +99,7 @@ fun FavoriteMenuBodyContent(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ElementGrid(navController, AppScreens.FavoritePlant.route, countries)
+            //ElementGrid(navController, AppScreens.FavoritePlant.route, countries)
 
         }
     }
