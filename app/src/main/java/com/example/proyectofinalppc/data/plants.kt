@@ -9,7 +9,7 @@ data class Plants(
     var ground: String,
     var height: Float,
     var image: String,
-    var maduration: Int,
+    var maduration: Float,
     var name: String,
     var plantCares: String,
     var plantDescription: String,

@@ -28,6 +28,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,7 +44,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.proyectofinalppc.R
+import com.example.proyectofinalppc.data.Plants
 import com.example.proyectofinalppc.navigation.AppScreens
+import com.example.proyectofinalppc.repository.FirebaseRepository
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -61,6 +64,14 @@ fun FavoriteMenuBodyContent(navController: NavController) {
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
     var showGrid by remember { mutableStateOf(true) }
+    val firebaseRepository = FirebaseRepository()
+    var plants by remember { mutableStateOf<List<Plants>>(emptyList()) }
+
+    LaunchedEffect(Unit) {
+        firebaseRepository.getDocuments { retrievedPlants ->
+            plants = retrievedPlants
+        }
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -80,16 +91,16 @@ fun FavoriteMenuBodyContent(navController: NavController) {
                 showGrid = false
             },
             placeholder = { Text(text = when (locale.language) {
-                "en" -> "Search a country"
-                "es" -> "Busca un país"
-                else -> "Search a country"
+                "en" -> "Search a plant"
+                "es" -> "Busca una planta"
+                else -> "Search a plant"
             }) },
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = null) },
         )
         {
             if (query.isNotEmpty()) {
-                val filteredFavorites = countries.filter { it.contains(query, true) }
-                //ElementGrid( navController, AppScreens.FavoritePlant.route, filteredFavorites)
+                val filteredFavorites = plants.filter { it.name.contains(query, true) }
+                ElementGrid( navController, AppScreens.FavoritePlant.route, filteredFavorites)
             }
         }
     }
@@ -99,7 +110,7 @@ fun FavoriteMenuBodyContent(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            //ElementGrid(navController, AppScreens.FavoritePlant.route, countries)
+            ElementGrid(navController, AppScreens.FavoritePlant.route, plants)
 
         }
     }

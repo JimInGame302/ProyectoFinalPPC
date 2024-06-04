@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 class FirebaseRepository @Inject constructor() {
 
+
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     fun getDocuments(callback: (List<Plants>) -> Unit) {
@@ -24,7 +25,7 @@ class FirebaseRepository @Inject constructor() {
                             document["ground"] as String,
                             (document["height"] as Number).toFloat(),
                             document["image"] as String,
-                            (document["maduration"] as Number).toInt(),
+                            (document["maduration"] as Number).toFloat(),
                             document["name"] as String,
                             document["plantCares"] as String,
                             document["plantDescription"] as String,

@@ -16,6 +16,7 @@ import com.example.proyectofinalppc.screens.SignUp
 @Composable
 fun AppNavigation(){
     val navController = rememberNavController()
+
     NavHost(navController = navController, startDestination = AppScreens.MainMenu.route) {
         composable(route=AppScreens.MainMenu.route){
             MainMenu(navController)
